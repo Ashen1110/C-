@@ -4,7 +4,7 @@
 #include<ctime>
 using namespace std;
 
-const int N = 10; //測資筆數
+const int N = 15; //測資筆數
 
 void open_input(ofstream &fout,int t_case){
     string dir_path = "../data/secret/";  //資料夾相對路徑
@@ -26,52 +26,30 @@ void make_input(ofstream &fout, int t_case){
     
     //範測放前面
     if(t_case==1){
-        fout << "3 90\n" ;
-        fout << "20 10 30" << endl;
+        fout << "734"<<endl;
     }
     else if(t_case==2){
-        fout << "3 100\n";
-        fout << "20 10 30" << endl;
+        fout << "3751"<<endl;
     }
     //放幾個比較能用肉眼看出答案的Random測資
     else if(t_case<=5){
-        int n=unif(generator)%10+1;
-        int d=unif(generator)%100+1;
-        fout << n << ' ' << d << endl;
-        for(int i=0;i<n;i++){
-            fout << unif(generator)%100+1 << ' '; 
-        }
-        fout << endl;
+        int sec = unif(generator)%3600+1;
+        fout << sec << endl;
     }
     // 放小的極端測資
     else if(t_case==6){
-        int n=1;
-        int d=1;
-        fout << n << ' ' << d << endl;
-        for(int i=0;i<n;i++){
-            fout << 1 << ' '; 
-        }
-        fout << endl;
+        int sec = 0;
+        fout << sec << endl;
     }
     // 放大的極端測資
     else if(t_case==7){
-        int n=1000;
-        int d=1000000000;
-        fout << n << ' ' << d << endl;
-        for(int i=0;i<n;i++){
-            fout << 1000000 << ' '; 
-        }
-        fout << endl;
+        int sec = 1000000000;
+        fout << sec << endl;
     }
     // 全隨機亂數
     else{
-        int n=unif(generator)%1000+1;
-        int d=unif(generator)%1000000000+1;
-        fout << n << ' ' << d << endl;
-        for(int i=0;i<n;i++){
-            fout << unif(generator)%1000000+1 << ' '; 
-        }
-        fout << endl;
+        int n=unif(generator)%1000000+1;
+        fout << n << endl;
     }
 }
 void close_input(ofstream &fout,int t_case){

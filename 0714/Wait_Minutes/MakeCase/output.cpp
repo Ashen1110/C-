@@ -3,11 +3,10 @@
 #include<algorithm>
 using namespace std;
 
-const int N = 10; //測資筆數
+const int N = 15; //測資筆數
 
 
-int n,d;
-int t[100100];
+int sec;
 
 void open_file(ifstream &finput,ofstream &foutput,int t_case){
     string dir_path = "../data/secret/";  //資料夾相對路徑
@@ -33,27 +32,12 @@ void open_file(ifstream &finput,ofstream &foutput,int t_case){
 void solve(ifstream &finput,ofstream &foutput, int t_case){
     /* 放完整解答Code */
 
-    finput >> n >> d;
-    for(int i=0;i<n;i++){
-        finput >> t[i];
-    }
-    sort(t,t+n);
-    int sum=0;
-    int ans=-1;
-    for(int i=0;i<n;i++){
-        if(i>0) t[i]+=t[i-1];
-        if(sum+t[i]>d){
-            ans=i;
-            break;
-        }
-        sum+=t[i];
-    }
-    if(ans==-1){
-        foutput << n << ' ' << sum << endl;
-    }
-    else{
-        foutput << ans << ' ' << sum << endl;
-    }
+    finput >> sec;
+    int hr = sec/3600;
+    sec %= 3600;
+    int min = sec/60;
+    int second = sec % 60;
+    foutput<<hr<<" hr "<<min<<" min "<<second<<" sec"<<endl;
 }
 void close_file(ifstream &finput,ofstream &foutput,int t_case){
     finput.close();

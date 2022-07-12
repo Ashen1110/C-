@@ -3,7 +3,7 @@
 #include<sstream>
 using namespace std;
 
-const int N = 10; //測資筆數
+const int N = 15; //測資筆數
 const int BUFSIZE = 7000000;
 void open_file(ifstream &finput,int t_case){
     string dir_path = "../data/secret/";  //資料夾相對路徑
@@ -17,7 +17,7 @@ void open_file(ifstream &finput,int t_case){
 }
 void check(ifstream &finput, int t_case){
     /* 放檢查Code */
-    int n,d;
+    int sec;
     string buf; //buffer 字串
     stringstream buf_s;  // 字串串流
     string check; // 檢查用
@@ -30,9 +30,9 @@ void check(ifstream &finput, int t_case){
     }
     buf_s << buf; //讀進字串串流
 
-    // 確認一行是兩個整數
-    if(!(buf_s >> n >> d)){
-        cerr << "input error, missiing variable n or d." << endl;
+    // 確認一行是一個整數
+    if(!(buf_s >> sec )){
+        cerr << "input error, missiing variable sec" << endl;
         exit(1);
     }
     if((buf_s >> check)){
@@ -41,40 +41,14 @@ void check(ifstream &finput, int t_case){
     }
 
     // 檢查範圍
-    if(n<1 || n>1000){
+    if(sec<0 || sec>2147483647){
         cerr << "input error, n is out of range." << endl;
-        exit(1);
-    }
-    if(d<1 || d>1000000000){
-        cerr << "input error, d is out of range." << endl;
-        exit(1);
-    }
-
-    //讀入第二行
-    if(!getline(finput,buf)){
-        cerr << "input error, missiing second line." << endl;
         exit(1);
     }
     
     finput.ignore(); // 下次用串流讀入 所以先 ignore擋 \n
     buf_s.clear(); // 先將字串串流清空
-    buf_s << buf;  //將第二行輸入讀進字串串流
 
-    // 開始檢查第二行
-    for(int i=0;i<n;i++){
-        int t;
-        // 檢查是否有少 （EOF）
-        if(!(buf_s >> t)){
-            cerr << "input error, missiing variable t[" << i << "]." << endl;
-            exit(1);
-        }
-
-        //檢查t範圍
-        if(t<1 || t>1000000){
-            cerr << "input error, t = " << t << " t[" << i << "] is out of range." << endl;
-            exit(1);
-        }
-    }
 
     // 檢查是否有多餘測資
     if((buf_s >> check) || (finput >> check)){
